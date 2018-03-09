@@ -18,17 +18,21 @@ namespace DatingApp.API.Controllers
         }
         // GET api/values
         [HttpGet]
-        public async  Task<IActionResult> Get()
+        public async Task<IActionResult> GetValues()
         {
+            
+
             var values = await _context.Values.ToListAsync();
             return Ok(values);
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{first}/{second}")]
+        public IActionResult Get(int first, int second)
         {
-            return "value";
+            // var values =  _context.Values.ToList();
+
+            return Ok(first + second);
         }
 
         // POST api/values
@@ -42,7 +46,6 @@ namespace DatingApp.API.Controllers
         public void Put(int id, [FromBody]string value)
         {
         }
-
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
