@@ -32,14 +32,15 @@ namespace DatingApp.API
             // var connectionString = @"localhost; Database=polarisdemo; Uid=admin; Pwd=password";
 
 
-            // services.AddDbContext<AppDbContext>(ops => ops.UseMySql(connectionString: connectionString));
-
             services.AddDbContext<DataContext>(
                 x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
             services.AddCors();
+            services.AddScoped<IAuthRepository,AuthRepository>();
         }
 
+       
+        // services.AddDbContext<AppDbContext>(ops => ops.UseMySql(connectionString: connectionString));
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
