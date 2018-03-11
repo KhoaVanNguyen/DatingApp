@@ -15,12 +15,22 @@ namespace DatingApp.API.Controllers
         }
         [HttpPost("register")]
         public async Task<ActionResult> Register([FromBody] UserForRegisterDto userForRegisterDto) {
-            /// validate user
+
+
+            //
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
-             if ( await _repo.UserExists(userForRegisterDto.Username) ) {
-                 return BadRequest("This user is exist");
-             }
+            if (await _repo.UserExists(userForRegisterDto.Username))
+            {
+                ModelState.AddModelError("Username", "Tên đăng nhập đã tồn tại");
+                // return BadRequest("This user is exist");
+            }
+            /// validate user by model state
+            if ( !ModelState.IsValid ) {
+                return BadRequest(ModelState);
+            }
+
+            
 
              var newUser = new User {
                  Username = userForRegisterDto.Username
