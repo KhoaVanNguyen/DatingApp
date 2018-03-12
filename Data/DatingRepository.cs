@@ -53,29 +53,29 @@ namespace DatingApp.API.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
-        Task<Photo> IDatingRepository.GetMainPhotoForUser(int userId)
-        {
-            throw new System.NotImplementedException();
-        }
+        // Task<Photo> IDatingRepository.GetMainPhotoForUser(int userId)
+        // {
+        //     throw new System.NotImplementedException();
+        // }
 
-        Task<Photo> IDatingRepository.GetPhoto(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        // Task<Photo> IDatingRepository.GetPhoto(int id)
+        // {
+        //     throw new System.NotImplementedException();
+        // }
 
-        Task<User> IDatingRepository.GetUser(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        // Task<User> IDatingRepository.GetUser(int id)
+        // {
+        //     throw new System.NotImplementedException();
+        // }
 
-        Task<IEnumerable<User>> IDatingRepository.GetUsers()
-        {
-            throw new System.NotImplementedException();
-        }
+        // Task<IEnumerable<User>> IDatingRepository.GetUsers()
+        // {
+        //     throw new System.NotImplementedException();
+        // }
 
-        Task<bool> IDatingRepository.SaveAll()
-        {
-            throw new System.NotImplementedException();
-        }
+        // Task<bool> IDatingRepository.SaveAll()
+        // {
+        //     throw new System.NotImplementedException();
+        // }
     }
 }

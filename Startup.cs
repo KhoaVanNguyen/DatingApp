@@ -17,7 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-
+using AutoMapper;
 namespace DatingApp.API
 {
     public class Startup
@@ -44,8 +44,13 @@ namespace DatingApp.API
 
             services.AddDbContext<DataContext>(
                 x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddMvc().AddJsonOptions(opt =>
+            {
+                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
             services.AddMvc();
             services.AddCors();
+            services.AddAutoMapper();
             services.AddScoped<IAuthRepository,AuthRepository>();
             services.AddScoped<IDatingRepository, DatingRepository>();
             //add seed  for injection;
