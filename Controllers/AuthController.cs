@@ -57,10 +57,10 @@ namespace DatingApp.API.Controllers
         {
 
 
-            throw new Exception("Error Message");
+            // throw new Exception("Error Message");
             
 
-            
+
             var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
 
             if (userFromRepo == null)

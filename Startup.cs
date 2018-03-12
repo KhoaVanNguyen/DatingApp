@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DatingApp.Api.Data;
 using DatingApp.API.Data;
 using DatingApp.API.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -46,6 +47,9 @@ namespace DatingApp.API
             services.AddMvc();
             services.AddCors();
             services.AddScoped<IAuthRepository,AuthRepository>();
+            //add seed  for injection;
+            services.AddTransient<Seed>();
+
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -64,7 +68,7 @@ namespace DatingApp.API
        
         // services.AddDbContext<AppDbContext>(ops => ops.UseMySql(connectionString: connectionString));
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
             if (!env.IsDevelopment())
             {
@@ -86,6 +90,7 @@ namespace DatingApp.API
                     });
                 });
             }
+            seeder.SeedUsers();
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseAuthentication();
             app.UseMvc();
