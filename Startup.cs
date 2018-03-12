@@ -47,6 +47,7 @@ namespace DatingApp.API
             services.AddMvc();
             services.AddCors();
             services.AddScoped<IAuthRepository,AuthRepository>();
+            services.AddScoped<IDatingRepository, DatingRepository>();
             //add seed  for injection;
             services.AddTransient<Seed>();
 
