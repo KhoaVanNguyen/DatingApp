@@ -7,6 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace DatingApp.API.Controllers
 {
@@ -16,12 +17,14 @@ namespace DatingApp.API.Controllers
         private readonly IConfiguration _config;
         private readonly IAuthRepository _repo;
 
-        public AuthController(IAuthRepository repo, IConfiguration config ){
+        public AuthController(IAuthRepository repo, IConfiguration config)
+        {
             this._config = config;
             this._repo = repo;
         }
         [HttpPost("register")]
-        public async Task<ActionResult> Register([FromBody] UserForRegisterDto userForRegisterDto) {
+        public async Task<ActionResult> Register([FromBody] UserForRegisterDto userForRegisterDto)
+        {
 
 
             //
@@ -33,32 +36,37 @@ namespace DatingApp.API.Controllers
                 // return BadRequest("This user is exist");
             }
             /// validate user by model state
-            if ( !ModelState.IsValid ) {
+            if (!ModelState.IsValid)
+            {
                 return BadRequest(ModelState);
             }
 
-            
 
-             var newUser = new User {
-                 Username = userForRegisterDto.Username
-             };
 
-             var createdUser = await _repo.Register(newUser,userForRegisterDto.Password);
-             return StatusCode(201);
-            
+            var newUser = new User
+            {
+                Username = userForRegisterDto.Username
+            };
+
+            var createdUser = await _repo.Register(newUser, userForRegisterDto.Password);
+            return StatusCode(201);
+
         }
         [HttpPost("login")]
-        public async Task<IActionResult> Login( [FromBody] UserForLoginDTO userForLoginDto )
+        public async Task<IActionResult> Login([FromBody] UserForLoginDTO userForLoginDto)
         {
-            // throw new Exception("error");
 
+
+            throw new Exception("Error Message");
+            
+
+            
             var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
 
             if (userFromRepo == null)
             {
                 return Unauthorized();
             }
-
             //generate token
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = System.Text.Encoding.ASCII.GetBytes(_config.GetSection("AppSettings:Token").Value);
@@ -76,9 +84,13 @@ namespace DatingApp.API.Controllers
             var tokenString = tokenHandler.WriteToken(token);
 
             // var user = _mapper.Map<UserForListDto>(userFromRepo);
-            return Ok(new { tokenString });
 
+            
+            return Ok(new { tokenString });
         }
     }
-   
+
 }
+
+
+
