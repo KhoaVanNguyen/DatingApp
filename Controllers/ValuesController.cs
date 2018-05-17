@@ -7,44 +7,55 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace DatingApp.API.Controllers {
-
-    //[Authorize]
-    [Route ("api/[controller]")]
-    public class ValuesController : Controller {
+namespace DatingApp.API.Controllers
+{
+    //To protect all routes
+    [AllowAnonymous]
+    [Route("api/[controller]")]
+    public class ValuesController : Controller
+    {
         private readonly DataContext _context;
-        public ValuesController (DataContext context) {
+        //shortcut for Constructo = ctor
+        //shortcut for Variable = prop
+        public ValuesController(DataContext context)
+        {
             _context = context;
         }
 
         // GET api/values
         [HttpGet]
-        public async Task<IActionResult> GetValues () {
-
-            var values = await _context.Values.ToListAsync ();
-            return Ok (values);
-            // throw new Exception ("test Exception");
+        public async Task<IActionResult> GetValues()
+        {
+            var values = await _context.Values.ToListAsync();
+            // throw new Exception("Aqui papito");
+            return Ok(values);
         }
 
         // GET api/values/5
-        [HttpGet ("{id}")]
-        public async Task<IActionResult> GetValue (int id) {
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetValue(int id)
+        {
+            var value = await _context.Values.FirstOrDefaultAsync(x => x.Id == id);
 
-            var value = await _context.Values.FirstOrDefaultAsync (v => v.Id == id);
-            return Ok (value);
-
+            return Ok(value);
         }
 
         // POST api/values
         [HttpPost]
-        public void Post ([FromBody] string value) { }
+        public void Post([FromBody]string value)
+        {
+        }
 
         // PUT api/values/5
-        [HttpPut ("{id}")]
-        public void Put (int id, [FromBody] string value) { }
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody]string value)
+        {
+        }
 
         // DELETE api/values/5
-        [HttpDelete ("{id}")]
-        public void Delete (int id) { }
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+        }
     }
 }
