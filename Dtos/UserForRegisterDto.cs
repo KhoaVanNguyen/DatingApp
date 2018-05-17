@@ -1,13 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace DatingApp.API.Dtos
-{
-    public class UserForRegisterDto
-    {
+namespace DatingApp.Api.Dtos {
+    public class UserForRegisterDto {
         [Required]
-        public string Username { get; set; }
+        public string UserName { get; set; }
+
         [Required]
-        [StringLength(10, MinimumLength = 4, ErrorMessage = "Bạn phải nhập mật khẩu độ dài từ 4-10 ký tự")]
+        [StringLength (8, MinimumLength = 4,ErrorMessage="you must specify a password between 4 and 8 characters!")]
         public string Password { get; set; }
     }
 }

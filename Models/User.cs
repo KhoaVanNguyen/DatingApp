@@ -2,13 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace DatingApp.API.Models
-{
-    public class User
-    {
+namespace DatingApp.Api.Models {
+    public class User {
         public int Id { get; set; }
 
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         public byte[] PasswordHash { get; set; }
 
@@ -39,6 +37,6 @@ namespace DatingApp.API.Models
         {
             this.Photos = new Collection<Photo>();
         }
+
     }
 }
-

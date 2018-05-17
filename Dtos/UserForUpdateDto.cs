@@ -1,7 +1,5 @@
-namespace DatingApp.API.Dtos
-{
-    public class UserForUpdateDto
-    {
+namespace DatingApp.Api.Dtos {
+    public class UserForUpdateDto {
         public string Introduction { get; set; }
         public string LookingFor { get; set; }
 

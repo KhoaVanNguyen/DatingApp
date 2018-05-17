@@ -19,7 +19,7 @@ namespace DatingApp.API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
 
-            modelBuilder.Entity("DatingApp.API.Models.Photo", b =>
+            modelBuilder.Entity("DatingApp.Api.Models.Photo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -43,7 +43,7 @@ namespace DatingApp.API.Migrations
                     b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("DatingApp.API.Models.User", b =>
+            modelBuilder.Entity("DatingApp.Api.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -72,14 +72,14 @@ namespace DatingApp.API.Migrations
 
                     b.Property<byte[]>("PasswordSalt");
 
-                    b.Property<string>("Username");
+                    b.Property<string>("UserName");
 
                     b.HasKey("Id");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("DatingApp.API.Models.Value", b =>
+            modelBuilder.Entity("DatingApp.Api.Models.Value", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -91,9 +91,9 @@ namespace DatingApp.API.Migrations
                     b.ToTable("Values");
                 });
 
-            modelBuilder.Entity("DatingApp.API.Models.Photo", b =>
+            modelBuilder.Entity("DatingApp.Api.Models.Photo", b =>
                 {
-                    b.HasOne("DatingApp.API.Models.User", "User")
+                    b.HasOne("DatingApp.Api.Models.User", "User")
                         .WithMany("Photos")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
